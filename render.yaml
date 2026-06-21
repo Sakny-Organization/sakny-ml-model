@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: sakny-ml
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: MODEL_PATH
+        value: price_estimator_model.pkl
+      - key: ALLOWED_ORIGINS
+        sync: false
