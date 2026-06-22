@@ -1,12 +1,14 @@
-name: Deploy ML Service to Render
+name: ML Service CI
 
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  validate-and-deploy:
-    name: Validate & Deploy
+  validate:
+    name: Validate
     runs-on: ubuntu-latest
 
     steps:
@@ -24,6 +26,3 @@ jobs:
 
       - name: Validate imports
         run: python -c "import main; import schemas; import matching; import pricing; print('All modules OK')"
-
-      - name: Deploy to Render
-        run: curl -s "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"
